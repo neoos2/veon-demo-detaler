@@ -1,0 +1,279 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import FutureLink from "../components/FutureLink.astro";
+import Logo from "../components/Logo.astro";
+
+const note = "Розділ у розробці";
+const phones = [
+  { tel: "+380990547111", label: "(099) 054 71 11", ch: false },
+  { tel: "+380970547111", label: "(097) 054 71 11", ch: true },
+  { tel: "+380630547111", label: "(063) 054 71 11", ch: true },
+  { tel: "+380680547111", label: "(068) 054 71 11", ch: false },
+];
+const viber = (n: string) => `viber://chat?number=%2B${n.replace("+", "")}`;
+const tg = (n: string) => `https://t.me/${n}`;
+const nav = [
+  ["#catalog", "Каталог"], ["#brands", "Бренди"], ["#delivery", "Доставка"], ["#returns", "Повернення"], ["#contacts", "Контакти"],
+];
+const sections = [
+  "Запчастини для ТО", "Підвіска і кермове", "Гальмівна система", "Охолодження та опалення", "Двигун та вихлоп",
+  "Зчеплення та трансмісія", "Електрика та освітлення", "Деталі кузова", "Олії та автохімія",
+];
+const brands = [
+  ["VICTOR REINZ", "l"], ["DENSO", "xl"], ["FEBEST", "m"], ["ASAM", "xl"], ["ELF", "xxl"], ["TEDGUM", "m"], ["BOSCH", "xxl"],
+  ["TOPRAN / HANS PRIES", "s"], ["MAGNETI MARELLI", "s"], ["KROON OIL", "l"], ["Hoffer", "xl"], ["LPR", "xxl"], ["MEAT&DORIA", "m"], ["JP GROUP", "l"],
+];
+const socials = [
+  ["Instagram", "https://www.instagram.com/detaler.com.ua"], ["Facebook", "https://www.facebook.com/detaler"],
+  ["TikTok", "https://www.tiktok.com/@detaler_com_ua"], ["YouTube", "https://www.youtube.com/@detaler8948"], ["Telegram", "https://t.me/detalercomua"],
+];
+const title = "Автозапчастини для іномарок з доставкою по Україні | Detaler";
+const description = "Запчастини для іномарок зі складу в Києві: підбір за авто й VIN, доставка Новою Поштою 1–3 дні, повернення 14 днів. Viber і Telegram.";
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "AutoPartsStore",
+  name: "Detaler",
+  description,
+  telephone: phones.map((p) => p.tel),
+  email: "mail@detaler.com.ua",
+  address: { "@type": "PostalAddress", streetAddress: "вул. Оболонська, 12", addressLocality: "Київ", postalCode: "04205", addressCountry: "UA" },
+  areaServed: { "@type": "Country", name: "Україна" },
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:30", closes: "19:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Saturday", "Sunday"], opens: "10:00", closes: "16:00" },
+  ],
+  sameAs: socials.map((s) => s[1]),
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} data-rec="R-201" />
+
+  <header slot="header" class="site-header" data-rec="R-105">
+    <div class="site-header__in container">
+      <Logo />
+      <nav class="nav" aria-label="Основне меню">
+        {nav.map(([h, t]) => <a href={h}>{t}</a>)}
+      </nav>
+      <FutureLink class="search" note="Пошук по каталогу з'явиться в повній версії">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+        <span>Пошук запчастин</span>
+      </FutureLink>
+      <p class="status" data-status data-state="static" data-rec="R-106">Пн–Пт 8:30–19:00, Київ</p>
+      <a class="header-phone" href="tel:+380970547111">(097) 054 71 11</a>
+      <details class="menu" data-menu>
+        <summary aria-label="Меню"><span class="menu__bars" aria-hidden="true"></span><span class="menu__txt">Меню</span></summary>
+        <div class="menu__panel">
+          <nav aria-label="Меню для телефона">
+            {nav.map(([h, t]) => <a href={h}>{t}</a>)}
+          </nav>
+          <p class="status status--m" data-status data-state="static">Пн–Пт 8:30–19:00</p>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <Section id="top" class="hero" label="Підбір авто">
+    <div class="hero__in container">
+      <h1 class="hero__h1" data-rec="R-205">Запчастини для іномарок з київського складу — по всій Україні</h1>
+      <div class="picker" role="group" aria-labelledby="picker-title">
+        <p class="picker__title" id="picker-title">Почніть з вашого авто</p>
+        <div class="picker__row">
+          <div class="field">
+            <label for="car-brand">Марка</label>
+            <select id="car-brand" name="brand"><option value="">Оберіть марку</option></select>
+          </div>
+          <div class="field">
+            <label for="car-model">Модель</label>
+            <select id="car-model" name="model" disabled><option value="">Оберіть модель</option></select>
+          </div>
+        </div>
+        <a class="btn btn--ink" href="#catalog">Показати розділи</a>
+      </div>
+      <div class="poster" data-rec="R-108" data-poster aria-live="polite" aria-atomic="true">
+        <p class="poster__name"><span class="poster__w" data-poster-brand>Ваше</span> <span class="poster__w poster__w--m" data-poster-model>авто</span></p>
+      </div>
+      <p class="vin">
+        <span>Знаєте VIN? Напишіть менеджеру:</span>
+        <a class="chip" href={viber("+380970547111")}>Viber</a>
+        <a class="chip" href={tg("+380970547111")} rel="noopener">Telegram</a>
+      </p>
+    </div>
+  </Section>
+
+  <Section id="catalog" class="block" label="Розділи каталогу">
+    <div class="container catalog">
+      <div class="catalog__head">
+        <h2>Розділи каталогу для <span data-car-for>вашого авто</span></h2>
+        <p class="fact"><strong>≈23&nbsp;000</strong><span>гальмівних колодок від понад 100&nbsp;виробників</span></p>
+      </div>
+      <ul class="index">
+        {sections.map((s) => (
+          <li>
+            <FutureLink class="index__row" note={note}>
+              <span class="index__name">{s}</span>
+              <span class="index__for">для <span data-car-for>вашого авто</span> <span aria-hidden="true" class="index__arr">→</span></span>
+            </FutureLink>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="brands" class="block block--surface" label="Бренди">
+    <div class="container">
+      <h2>Бренди з топу продажів</h2>
+      <ul class="brands">
+        {brands.map(([b, k]) => <li class={`brands__i brands__i--${k}`}>{b}</li>)}
+      </ul>
+      <p class="brands__note">Оригінал (VAG OEM, TOYOTA OEM) і аналоги: ATE, Bosch, Meyle, TRW, Textar та ще понад 100 виробників гальмівних колодок.</p>
+    </div>
+  </Section>
+
+  <Section id="delivery" class="block block--band" label="Доставка">
+    <div class="container">
+      <h2>Замовлення до 16:00 відправляємо Новою Поштою</h2>
+      <p class="lead">Доставка наступного дня або за два дні. Склад і самовивіз — у Києві.</p>
+      <div class="day" data-reveal>
+        <div class="day__track" aria-hidden="true">
+          <span class="day__fill"></span>
+          <span class="day__mark"></span>
+        </div>
+        <ol class="day__list">
+          <li class="day__t day__t--a"><b>8:30</b><span>Початок роботи (Пн–Пт)</span></li>
+          <li class="day__t day__t--m"><b>16:00</b><span>Замовлення до цього часу відправляємо Новою Поштою</span></li>
+          <li class="day__t day__t--z"><b>19:00</b><span>Кінець роботи (Пн–Пт)</span></li>
+        </ol>
+      </div>
+      <ul class="ways">
+        <li>
+          <h3>Нова Пошта</h3>
+          <p class="ways__big">1–3 дні · від 75&nbsp;₴</p>
+          <p>У відділення або кур'єром до дверей, по всій Україні.</p>
+        </li>
+        <li>
+          <h3>Таксі-кур'єр по Києву</h3>
+          <p class="ways__big">150&nbsp;₴ · 13:00–18:00</p>
+          <p>1–2 дні, за наявності товару. Повна передоплата, якщо не домовлено з менеджером.</p>
+        </li>
+        <li>
+          <h3>Самовивіз</h3>
+          <p class="ways__big">вул. Оболонська, 12</p>
+          <p>Склад у Києві, контактна особа — Сергій.</p>
+        </li>
+      </ul>
+      <p class="pay"><b>Оплата:</b> накладений платіж (до 1000&nbsp;₴ — передоплата), Visa/MasterCard, Privat24, рахунок, готівка в Києві.</p>
+    </div>
+  </Section>
+
+  <Section id="returns" class="block" label="Повернення і гарантія">
+    <div class="container returns">
+      <h2>Якщо не підійшло — повернемо</h2>
+      <div class="returns__grid">
+        <div class="big">
+          <p class="big__n">14 днів</p>
+          <p class="big__t">Безкоштовне повернення через «Легке повернення» Нової Пошти. Для відправлень до 30&nbsp;кг.</p>
+        </div>
+        <div class="big">
+          <p class="big__n">6 місяців <span>або 10&nbsp;000&nbsp;км</span></p>
+          <p class="big__t">Гарантія на запчастини — за наявності актів сертифікованого СТО.</p>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="repeat" class="block block--surface" label="Повторні замовлення">
+    <div class="container repeat">
+      <blockquote class="repeat__q">
+        <p>«Більше 50% всіх замовлень — це повторні покупки»</p>
+        <footer>Detaler про свій магазин</footer>
+      </blockquote>
+      <ul class="repeat__list">
+        <li>
+          <h3 class="repeat__h">Ваше авто</h3>
+          <p data-car-saved>Оберіть авто на початку сторінки — ми запам'ятаємо його на цьому пристрої</p>
+          <button class="link-btn" type="button" data-car-forget hidden>Забути авто</button>
+        </li>
+        <li>
+          <h3 class="repeat__h">Замовлення в 1 клік</h3>
+          <p>За телефоном: <a class="ul" href="tel:+380970547111">(097) 054 71 11</a></p>
+        </li>
+        <li>
+          <h3 class="repeat__h">Знижки постійним клієнтам</h3>
+          <p>Гнучка система знижок для тих, хто повертається.</p>
+        </li>
+        <li>
+          <h3 class="repeat__h">Статус замовлення</h3>
+          <p><FutureLink class="ul" note="Перевірка статусу з'явиться в повній версії">Перевірити статус</FutureLink></p>
+        </li>
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="contacts" class="block" label="Контакти">
+    <div class="container contacts" data-rec="R-106">
+      <h2>Запчастини для <span data-car-for>вашого авто</span> — у Viber</h2>
+      <div class="contacts__grid">
+        <ul class="phones">
+          {phones.map((p) => (
+            <li>
+              <a class="phones__n" href={`tel:${p.tel}`}>{p.label}</a>
+              {p.ch && <span class="phones__ch"><a href={viber(p.tel)}>Viber</a><a href={tg(p.tel)} rel="noopener">Telegram</a></span>}
+            </li>
+          ))}
+        </ul>
+        <div class="info">
+          <h3>Склад і самовивіз</h3>
+          <p>04205, Київ, вул. Оболонська, 12<br />Контактна особа — Сергій<br /><a class="ul" href="https://www.google.com/maps/search/?api=1&query=%D0%9A%D0%B8%D1%97%D0%B2%2C+%D0%B2%D1%83%D0%BB.+%D0%9E%D0%B1%D0%BE%D0%BB%D0%BE%D0%BD%D1%81%D1%8C%D0%BA%D0%B0%2C+12" rel="noopener">Відкрити на карті</a></p>
+          <h3>Графік</h3>
+          <p>Пн–Пт 8:30–19:00<br />Сб–Нд 10:00–16:00</p>
+          <h3>E-mail</h3>
+          <p><a class="ul" href="mailto:mail@detaler.com.ua">mail@detaler.com.ua</a></p>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <footer slot="footer" class="foot">
+    <div class="container foot__in">
+      <div>
+        <Logo class="foot__logo" />
+        <p class="foot__t">Інтернет-магазин автозапчастин для іномарок. Київ, вул. Оболонська, 12.</p>
+        <p class="lang"><span aria-current="true">UA</span><FutureLink note={note}>RU</FutureLink></p>
+      </div>
+      <div>
+        <p class="foot__h">Каталог</p>
+        <ul>{sections.map((s) => <li><FutureLink note={note}>{s}</FutureLink></li>)}</ul>
+      </div>
+      <div>
+        <p class="foot__h">Покупцям</p>
+        <ul>
+          <li><a href="#delivery">Доставка й оплата</a></li>
+          <li><a href="#returns">Повернення і гарантія</a></li>
+          <li><FutureLink note={note}>Оферта</FutureLink></li>
+          <li><FutureLink note={note}>Гарантія</FutureLink></li>
+          <li><FutureLink note={note}>Статті та огляди</FutureLink></li>
+        </ul>
+      </div>
+      <div>
+        <p class="foot__h">Ми в мережі</p>
+        <ul data-rec="S-R101">{socials.map(([n, h]) => <li><a href={h} rel="noopener">{n}</a></li>)}</ul>
+        <p class="foot__h foot__h--sp">Контакти</p>
+        <ul>
+          <li><a href="tel:+380970547111">(097) 054 71 11</a></li>
+          <li><a href="mailto:mail@detaler.com.ua">mail@detaler.com.ua</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="container foot__c">© Detaler</p>
+  </footer>
+
+  <nav slot="footer" class="bar" aria-label="Швидкі дії" data-rec="R-105">
+    <a href="tel:+380970547111">Подзвонити</a>
+    <a href={viber("+380970547111")}>Viber</a>
+    <a href={tg("+380970547111")} rel="noopener">Telegram</a>
+    <a href="#top" data-car-bar>Моє авто</a>
+  </nav>
+
+  <script src="../scripts/site.ts"></script>
+</Base>

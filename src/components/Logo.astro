@@ -1,0 +1,7 @@
+---
+interface Props { class?: string; }
+const { class: cls } = Astro.props;
+---
+<a href="#top" class:list={["logo", cls]} aria-label="Detaler — на початок сторінки">
+  <img src="/img/logo-white.png" width="176" height="25" alt="" decoding="async" />
+</a>

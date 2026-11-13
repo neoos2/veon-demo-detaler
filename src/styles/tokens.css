@@ -1,0 +1,37 @@
+/* Hallmark · shape: single-page index · genre: modern-minimal · theme: custom · job: buy · idea: "Спочатку ваша машина: сторінка починає з авто відвідувача, називає його великими літерами й тримає назву до футера" · vibe: "жовте поле, графіт, плакатна типографіка, ясний сервіс"
+ * paper: #FFFFFF · accent: #FFCD00 · display: Unbounded · body: Murecho · hero: суцільне жовте поле, H1 і підбір марка-модель ліворуч, назва авто плакатним кеглем праворуч · nav: біла шапка з якорями, статусом роботи й телефоном · footer: світло-сірий, чотири колонки · imagery: none · signature: назва обраного авто проходить сторінкою й зберігається на пристрої
+ * axes: light/wide-grotesk/yellow-field · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: E, фото клієнта немає — картинку замінює типографіка й колір */
+/* Line 1 of this file is the Hallmark stamp (docs/process/hallmark.md). Client design tokens from design/concept.md. */
+:root {
+  --color-brand: #FFCD00;
+  --color-ink: #131921;
+  --color-band: #1E2630;
+  --color-paper: #FFFFFF;
+  --color-surface: #EEF0F2;
+  --color-muted: #535B66;
+  --color-line: #D5D9DE;
+  --color-success: #1E7A47;
+  --color-bg: var(--color-paper);
+  --color-text: var(--color-ink);
+  --color-accent: var(--color-ink);
+  --font-display: "Unbounded Variable", "Arial Black", system-ui, sans-serif;
+  --font-body: "Murecho Variable", system-ui, sans-serif;
+  --radius: 2px;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur: 600ms;
+  --space: 1.25rem;
+  --container: 1280px;
+  --gutter: 1.5rem;
+  --sp-1: .5rem; --sp-2: 1rem; --sp-3: 1.5rem; --sp-4: 2.5rem; --sp-5: 4rem; --sp-6: 6.5rem;
+  --section-y: var(--sp-5);
+  --fs-s: .875rem; --fs-body: 1.0625rem; --fs-m: 1.3125rem; --fs-l: 1.625rem;
+  --fs-h1: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
+  --fs-h2: clamp(1.5rem, 1.1rem + 1.6vw, 2.375rem);
+  --fs-car: clamp(2.75rem, 2rem + 6vw, 8rem);
+  --header-h: 56px;
+  --bar-h: 64px;
+}
+@media (min-width: 900px) {
+  :root { --section-y: var(--sp-6); --header-h: 72px; --bar-h: 0px; --space: 1.5rem; }
+}
